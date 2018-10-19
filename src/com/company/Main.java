@@ -3,14 +3,28 @@ package com.company;
 import java.util.Scanner;
 
 public class Main {
-    public static double validarDecimal(Scanner sc) {
-        double numeroValidado;
-        while (!sc.hasNextDouble()) {
-            System.out.print("¡Introduce un valor numérico! ");
-            sc.next();
+    public static double validador(int opcion){
+        double validado = 0;
+        Scanner sc = new Scanner(System.in);
+        switch (opcion){
+            case  0:{
+                while(!sc.hasNextInt()){
+                    System.out.print("¡Por favor introduce un número entero! ");
+                    sc.next();
+                }
+                validado = sc.nextDouble();
+            }
+            break;
+            case 1:{
+                while(!sc.hasNextDouble()){
+                    System.out.print("¡Por favor introduce un número decimal! ");
+                    sc.next();
+                }
+                validado = sc.nextDouble();
+            }
+            break;
         }
-        numeroValidado = sc.nextDouble();
-        return numeroValidado;
+        return  validado;
     }
 
     public static boolean validarNota(double nota) {
@@ -64,13 +78,12 @@ public class Main {
         Scanner sc = new Scanner(System.in);
         System.out.println("¡Vamos a comprobar una calificación!");
         System.out.print("Introduce un nota: ");
-        nota = validarDecimal(sc);
+        nota = validador(1);
         while (!validarNota(nota)) {
             System.out.print("¡Introdice una nota entre 0 y 10! ");
-            nota = validarDecimal(sc);
+            nota = validador(1);
         }
         sc.close();
-        System.out.println(redondeaCalificacion(nota));
         System.out.printf("La calificación de la nota %f es: %s\n", nota, daCalificacion((int) redondeaCalificacion(nota)));
     }
 }
